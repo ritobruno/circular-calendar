@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,400;0,600;0,700;0,900;1,100;1,200;1,400;1,600;1,700;1,900&display=swap" rel="stylesheet">
+    <title>Circular Calendar</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <div class="today-wrapper"></div>
+    <div class="container">
+
+    </div>
+
+    <script  src="script.js"></script>
+    <script src="moment.js"></script>
+    <script>
+       
+        let container = document.querySelector(".container");
+        let todayWrapper = document.querySelector(".today-wrapper");
+        
+        let today = moment().format("dddd, MMMM Do");
+        let startAngle = 0;
+        let todayNumber = moment().dayOfYear();
+        let incMonth = 360/12;
+        let incYear = 360/366;
+
+        let x = screen.width/2;
+        let y = screen.height/2 - 50;
+        let radius = 400;
+
+    function drawCalendar() {
+        
+        for (let i=0; i < 360; i+=incYear) {
+                
+            let xpos = x + radius * Math.cos(i * Math.PI/180);
+            let ypos = y + radius * Math.sin(i * Math.PI/180);
+
+            let dayWrapper = document.createElement("div");
+            container.appendChild(dayWrapper);
+            dayWrapper.classList.add('days-of-year');
+            dayWrapper.style.left = xpos + 'px';
+            dayWrapper.style.top = ypos + 'px';
+            dayWrapper.style.transform = 'rotate(' + i + 'deg)';
+
+            /*
+            //add days of the year
+            let dYear = moment().dayOfYear(j);
+            dayWrapper.innerHTML = dYear.format("Do MMM");
+            dayWrapper.style.transform = 'rotate(' + i + 'deg)';
+            }
+            */
+            
+
+        }
+
+        let dYear = moment().dayOfYear();
+        let today = moment().dayOfYear(dYear).format("ddd, Do MMM");
+        let aDays = document.querySelectorAll(".days-of-year");
+        aDays[dYear].classList.add('is-today');
+        aDays[dYear].innerHTML = today;
+        
+        console.log(dYear);
+
+
+        //Highlight today
+        for( let j=0; j <= aDays.length; j++) {
+            if(j === todayNumber) {
+                aDays[j].classList.add('is-today');
+            }
+            else if (j < todayNumber) {
+                aDays[j].classList.add('is-past');
+            }
+        }
+        
+    }
+    
+    drawCalendar();
+
+    function drawMonths() {
+            
+        for (let l=0; l < 360; l+=incMonth) {
+
+            let xpos = x + radius/1.2 * Math.cos(l * Math.PI/180);
+            let ypos = y + radius/1.2 * Math.sin(l * Math.PI/180);
+
+            let monthWrapper = document.createElement("div");
+            container.appendChild(monthWrapper);
+            monthWrapper.classList.add('month');
+            monthWrapper.style.left = xpos + 'px';
+            monthWrapper.style.top = ypos + 'px';
+
+            let month = moment().month(l/incMonth).format("MMM");
+            monthWrapper.innerHTML = month;
+            
+        }
+
+    }
+    drawMonths();
+
+    
+
+    function addYear() {
+        let yearWrapper = document.createElement("div");
+        document.body.appendChild(yearWrapper);
+        yearWrapper.classList.add('year-wrapper');
+        yearWrapper.style.left = x + 'px';
+        yearWrapper.style.top = y + 'px';
+        yearWrapper.innerHTML = moment().year();
+    }
+    addYear();
+
+    function addToday () {
+        todayWrapper.innerHTML = moment().format("dddd, MMMM Do");
+        todayWrapper.style.left = x - 60 + 'px';
+        todayWrapper.style.top = y - 150 + 'px';
+    }
+    addToday();
+    
+
+
+    let daysInMonth = [];
+    //add the total number of each month to array
+    for (let i=1; i < 13; i++) {
+        daysInMonth.push(moment("'2020-'" + i + '""').daysInMonth());
+    }
+
+
+    </script>
+</body>
+</html>
