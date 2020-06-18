@@ -3,6 +3,7 @@
     --font-color: #000;
     --days-color: rgb(73, 73, 73);
     --days-past: rgb(187, 187, 187);
+    --today-color: coral;
   }
   
   [data-theme="dark"] {
@@ -10,9 +11,8 @@
     --font-color: #fff;
     --days-color: rgb(73, 73, 73);
     --days-past: rgb(187, 187, 187);
+    --today-color: coral;
   }
-
-
 
 * {
     margin: 0;
@@ -62,7 +62,7 @@ body {
 }
 
 .is-today:before {
-    background-color: coral;
+    background-color: var(--today-color);
     height: 2px;
 }
 

@@ -48,16 +48,15 @@
             let ypos = y + radius * Math.sin(i * Math.PI/180);
 
             let dayWrapper = document.createElement("div");
+            let dayMark = document.createElement("div");
+            dayMark.classList.add('day-mark');
+            dayWrapper.appendChild(dayMark);
             container.appendChild(dayWrapper);
             dayWrapper.classList.add('days-of-year');
             dayWrapper.style.left = xpos + 'px';
             dayWrapper.style.top = ypos + 'px';
             dayWrapper.style.transform = 'rotate(' + i + 'deg)';
             
-            let dayMark = document.createElement("div");
-            dayWrapper.appendChild(dayMark);
-            dayMark.classList.add('day-mark');
-
         }
 
         let dYear = moment().dayOfYear();
@@ -66,16 +65,38 @@
         aDays[dYear].classList.add('is-today');
         aDays[dYear].innerHTML = today;
         
-
         //Highlight today
         for( let j=0; j <= aDays.length; j++) {
-            if(j === todayNumber) {
-                aDays[j].classList.add('is-today');
-            }
-            else if (j < todayNumber) {
+            
+            if (j < todayNumber) {
                 aDays[j].classList.add('is-past');
             }
         }
+
+        //get days to display on hover
+        function getDays() {
+            let dayElem = document.querySelectorAll(".days-of-year");
+
+            for (let i = 0; i < dayElem.length; i++) {
+                dayElem[i].addEventListener('mouseover', showDay);
+
+                function showDay() {
+                    let theDay = moment().dayOfYear(i).format("ddd, Do MMM");
+                    dayElem[i].innerHTML = theDay;
+                    console.log(theDay);
+                }
+            }
+            
+            //highlight first day of the month
+            let daysInMonth = [];
+            //add the total number of each month to array
+            for (let i=1; i < 13; i++) {
+                daysInMonth.push(moment("'2020-'" + i + '""').daysInMonth());
+            }
+            console.log(daysInMonth);
+
+        }
+        getDays();
         
     }
     
@@ -102,20 +123,6 @@
 
     }
     drawMonths();
-
-    function getDays() {
-        let dayElem = document.querySelectorAll(".days-of-year");
-
-        //higlight first day of the month
-        let daysInMonth = [];
-        //add the total number of each month to array
-        for (let i=1; i < 13; i++) {
-            daysInMonth.push(moment("'2020-'" + i + '""').daysInMonth());
-        }
-        console.log(daysInMonth);
-
-    }
-    getDays();
 
 
     //Information at the center of the circle
