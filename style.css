@@ -1,3 +1,19 @@
+:root {
+    --bg-color: #fff;
+    --font-color: #000;
+    --days-color: rgb(73, 73, 73);
+    --days-past: rgb(187, 187, 187);
+  }
+  
+  [data-theme="dark"] {
+    --bg-color: rgb(24, 24, 24);
+    --font-color: #fff;
+    --days-color: rgb(73, 73, 73);
+    --days-past: rgb(187, 187, 187);
+  }
+
+
+
 * {
     margin: 0;
     padding: 0;
@@ -6,7 +22,7 @@
 
 body {
     font-family: 'Fira Sans', sans-serif;
-    background-color:#fff;
+    background-color:var(--bg-color);
 } 
 
 .container .days-of-year {
@@ -15,21 +31,14 @@ body {
     cursor: default;
     transform-origin: center left;
     font-weight: 400;
-    color: rgb(73, 73, 73);
+    color: var(--days-color);
 }
 
-.days-of-year:hover {
-    color: #000;
-}
-
-.days-of-year:before {
-    content: "";
-    width: 20px;
+.day-mark {
+    width: 12px;
     height: 1px;
-    background-color: #000;
+    background-color: var(--font-color);
     position: absolute;
-    margin-left: -24px;
-    margin-top: 4px;
 }
 
 .year-wrapper {
@@ -37,17 +46,19 @@ body {
     position: absolute;
     font-weight: 100;
     transform: translateX(-200px) translateY(-150px);
+    color: var(--font-color);
 }
 
 .today-wrapper {
     position: absolute;
     font-weight: 300;
+    color: var(--font-color);
 }
 
 .is-today {
-    color: #000 !important;
+    color: var(--font-color) !important;
     font-size: 16px !important;
-    transform-origin: top left !important;
+    margin-left: -20px;
 }
 
 .is-today:before {
@@ -56,12 +67,9 @@ body {
 }
 
 .is-past {
-    color: rgb(187, 187, 187) !important;
+    color: var(--days-past) !important;
 }
 
-.is-past:before {
-    background-color: #ddd;
-}
 
 .month {
     position: absolute;
@@ -69,6 +77,66 @@ body {
     cursor: default;
     transform-origin: center left;
     font-weight: 400;
-    color: rgb(73, 73, 73);
+    color: var(--days-color);
     text-transform: uppercase;
 }
+
+
+/******* Theme Switcher ***********/
+
+.theme-switch-wrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    margin: 16px 32px;
+  }
+  
+    .theme-switch {
+      display: inline-block;
+      height: 20px;
+      position: relative;
+      width: 40px;
+    }
+    
+    .theme-switch input {
+      display:none;
+    }
+    
+    .slider {
+      background-color: #f0f0f0;
+      bottom: 0;
+      cursor: pointer;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      transition: .4s;
+    }
+    
+    .slider:before {
+      background-color: #FFD76F;
+      bottom: 2px;
+      content: "";
+      height: 16px;
+      left: 4px;
+      position: absolute;
+      transition: .4s;
+      width: 16px;
+    }
+    
+    input:checked + .slider {
+      background-color: rgb(43, 43, 43);
+    }
+    
+    input:checked + .slider:before {
+      transform: translateX(16px);
+      background-color:#fff;
+    }
+    
+    .slider.round {
+      border-radius: 34px;
+    }
+    
+    .slider.round:before {
+      border-radius: 50%;
+    }
