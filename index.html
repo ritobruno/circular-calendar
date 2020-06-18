@@ -11,12 +11,19 @@
 
 </head>
 <body>
+
+    <div class="theme-switch-wrapper">
+        <label class="theme-switch" for="checkbox">
+            <input type="checkbox" id="checkbox">
+            <div class="slider round"></div>
+        </label>
+    </div>
+
     <div class="today-wrapper"></div>
     <div class="container">
 
     </div>
 
-    <script  src="script.js"></script>
     <script src="moment.js"></script>
     <script>
        
@@ -46,15 +53,10 @@
             dayWrapper.style.left = xpos + 'px';
             dayWrapper.style.top = ypos + 'px';
             dayWrapper.style.transform = 'rotate(' + i + 'deg)';
-
-            /*
-            //add days of the year
-            let dYear = moment().dayOfYear(j);
-            dayWrapper.innerHTML = dYear.format("Do MMM");
-            dayWrapper.style.transform = 'rotate(' + i + 'deg)';
-            }
-            */
             
+            let dayMark = document.createElement("div");
+            dayWrapper.appendChild(dayMark);
+            dayMark.classList.add('day-mark');
 
         }
 
@@ -64,8 +66,6 @@
         aDays[dYear].classList.add('is-today');
         aDays[dYear].innerHTML = today;
         
-        console.log(dYear);
-
 
         //Highlight today
         for( let j=0; j <= aDays.length; j++) {
@@ -79,14 +79,15 @@
         
     }
     
-    drawCalendar();
+    drawCalendar();   
+    
 
     function drawMonths() {
             
         for (let l=0; l < 360; l+=incMonth) {
 
-            let xpos = x + radius/1.2 * Math.cos(l * Math.PI/180);
-            let ypos = y + radius/1.2 * Math.sin(l * Math.PI/180);
+            let xpos = x + radius/1.1 * Math.cos(l * Math.PI/180);
+            let ypos = y + radius/1.1 * Math.sin(l * Math.PI/180);
 
             let monthWrapper = document.createElement("div");
             container.appendChild(monthWrapper);
@@ -102,8 +103,22 @@
     }
     drawMonths();
 
-    
+    function getDays() {
+        let dayElem = document.querySelectorAll(".days-of-year");
 
+        //higlight first day of the month
+        let daysInMonth = [];
+        //add the total number of each month to array
+        for (let i=1; i < 13; i++) {
+            daysInMonth.push(moment("'2020-'" + i + '""').daysInMonth());
+        }
+        console.log(daysInMonth);
+
+    }
+    getDays();
+
+
+    //Information at the center of the circle
     function addYear() {
         let yearWrapper = document.createElement("div");
         document.body.appendChild(yearWrapper);
@@ -120,15 +135,35 @@
         todayWrapper.style.top = y - 150 + 'px';
     }
     addToday();
-    
 
 
-    let daysInMonth = [];
-    //add the total number of each month to array
-    for (let i=1; i < 13; i++) {
-        daysInMonth.push(moment("'2020-'" + i + '""').daysInMonth());
+    //Switch light/dark theme
+    const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+
+    function switchTheme(e) {
+        if(e.target.checked) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            //Store the user preferences
+            localStorage.setItem('theme', 'dark');
+        }
+        else {
+            document.documentElement.setAttribute('data-theme', 'light');
+            //Store the user preferences
+            localStorage.setItem('theme', 'light');
+        }
     }
 
+    toggleSwitch.addEventListener('change', switchTheme, false);
+
+    //Store the user preferences
+    const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
+
+    if (currentTheme) {
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        if(currentTheme === 'dark') {
+            toggleSwitch.checked = true;
+        }
+    }
 
     </script>
 </body>
