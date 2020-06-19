@@ -9,7 +9,7 @@
   [data-theme="dark"] {
     --bg-color: rgb(24, 24, 24);
     --font-color: #fff;
-    --days-color: rgb(73, 73, 73);
+    --days-color: rgb(173, 173, 173);
     --days-past: rgb(187, 187, 187);
     --today-color: coral;
   }
@@ -51,7 +51,6 @@ body {
     height: 1px;
     background-color: var(--font-color);
     position: relative;
-    padding: 3px 0;
 }
 
 .year-wrapper {

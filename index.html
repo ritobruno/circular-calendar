@@ -92,11 +92,11 @@
                 function showDay() {
                     let theDay = moment().dayOfYear(i).format("ddd, Do MMM");
                     day[i].innerHTML = theDay;
-                    day[i].style.display = "block";
+                    day[i].style.opacity = "1";
                 }
 
                 function hideDay() {
-                    day[i].style.display = "none";
+                    day[i].style.opacity = "0";
                 }
             }
             
