@@ -32,13 +32,26 @@ body {
     transform-origin: center left;
     font-weight: 400;
     color: var(--days-color);
+    display: flex;
+}
+
+.days-of-year:hover > .day-mark {
+    background-color: red !important;
+}
+
+.day {
+    padding-left: 16px;
+    position: relative;
+    height: 8px;
+    transform: translateY(-16px);
 }
 
 .day-mark {
     width: 12px;
     height: 1px;
     background-color: var(--font-color);
-    position: absolute;
+    position: relative;
+    padding: 3px 0;
 }
 
 .year-wrapper {

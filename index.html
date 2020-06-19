@@ -48,11 +48,17 @@
             let ypos = y + radius * Math.sin(i * Math.PI/180);
 
             let dayWrapper = document.createElement("div");
+            let day = document.createElement("div");
             let dayMark = document.createElement("div");
-            dayMark.classList.add('day-mark');
-            dayWrapper.appendChild(dayMark);
+            
             container.appendChild(dayWrapper);
+            dayWrapper.appendChild(dayMark);
+            dayWrapper.appendChild(day);
+            
+            dayMark.classList.add('day-mark');
+            day.classList.add('day');
             dayWrapper.classList.add('days-of-year');
+
             dayWrapper.style.left = xpos + 'px';
             dayWrapper.style.top = ypos + 'px';
             dayWrapper.style.transform = 'rotate(' + i + 'deg)';
@@ -76,14 +82,21 @@
         //get days to display on hover
         function getDays() {
             let dayElem = document.querySelectorAll(".days-of-year");
+            let day = document.querySelectorAll(".day");
 
+            //show and hide each day of the year on hover
             for (let i = 0; i < dayElem.length; i++) {
                 dayElem[i].addEventListener('mouseover', showDay);
+                dayElem[i].addEventListener('mouseout', hideDay);
 
                 function showDay() {
                     let theDay = moment().dayOfYear(i).format("ddd, Do MMM");
-                    dayElem[i].innerHTML = theDay;
-                    console.log(theDay);
+                    day[i].innerHTML = theDay;
+                    day[i].style.display = "block";
+                }
+
+                function hideDay() {
+                    day[i].style.display = "none";
                 }
             }
             
