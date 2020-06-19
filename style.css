@@ -3,16 +3,16 @@
     --font-color: #000;
     --days-color: rgb(73, 73, 73);
     --days-past: rgb(187, 187, 187);
+    --today-color: coral;
   }
   
   [data-theme="dark"] {
     --bg-color: rgb(24, 24, 24);
     --font-color: #fff;
-    --days-color: rgb(73, 73, 73);
+    --days-color: rgb(173, 173, 173);
     --days-past: rgb(187, 187, 187);
+    --today-color: coral;
   }
-
-
 
 * {
     margin: 0;
@@ -32,13 +32,25 @@ body {
     transform-origin: center left;
     font-weight: 400;
     color: var(--days-color);
+    display: flex;
+}
+
+.days-of-year:hover > .day-mark {
+    background-color: red !important;
+}
+
+.day {
+    padding-left: 16px;
+    position: relative;
+    height: 8px;
+    transform: translateY(-16px);
 }
 
 .day-mark {
     width: 12px;
     height: 1px;
     background-color: var(--font-color);
-    position: absolute;
+    position: relative;
 }
 
 .year-wrapper {
@@ -62,7 +74,7 @@ body {
 }
 
 .is-today:before {
-    background-color: coral;
+    background-color: var(--today-color);
     height: 2px;
 }
 
