@@ -2,7 +2,7 @@
     --bg-color: #fff;
     --font-color: #000;
     --days-color: rgb(73, 73, 73);
-    --days-past: rgb(187, 187, 187);
+    --days-past: rgb(211, 211, 211);
     --today-color: coral;
   }
   
@@ -10,7 +10,7 @@
     --bg-color: rgb(24, 24, 24);
     --font-color: #fff;
     --days-color: rgb(173, 173, 173);
-    --days-past: rgb(187, 187, 187);
+    --days-past: rgb(71, 71, 71);
     --today-color: coral;
   }
 
@@ -27,7 +27,7 @@ body {
 
 .container .days-of-year {
     position: absolute;
-    font-size: 16px;
+    font-size: 14px;
     cursor: default;
     transform-origin: center left;
     font-weight: 400;
@@ -36,7 +36,8 @@ body {
 }
 
 .days-of-year:hover > .day-mark {
-    background-color: red !important;
+    background-color: #F57F17 !important;
+    height: 2px;
 }
 
 .day {
@@ -51,6 +52,12 @@ body {
     height: 1px;
     background-color: var(--font-color);
     position: relative;
+}
+
+.first-day-month > .day-mark {
+  background-color: var(--font-color);
+  width: 16px;
+  height: 2px;
 }
 
 .year-wrapper {
@@ -78,10 +85,14 @@ body {
     height: 2px;
 }
 
-.is-past {
+.is-past > .day-mark {
     color: var(--days-past) !important;
+    background-color: var(--days-past);
 }
 
+.is-past > .day {
+  color: var(--days-past) !important;
+}
 
 .month {
     position: absolute;
@@ -92,6 +103,7 @@ body {
     color: var(--days-color);
     text-transform: uppercase;
 }
+
 
 
 /******* Theme Switcher ***********/

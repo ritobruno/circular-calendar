@@ -105,9 +105,17 @@
             //add the total number of each month to array
             for (let i=1; i < 13; i++) {
                 daysInMonth.push(moment("'2020-'" + i + '""').daysInMonth());
+                
             }
-            console.log(daysInMonth);
-
+            
+            let sum = 0;
+            for (let i = 0; i < daysInMonth.length; i++) {
+                sum = sum + daysInMonth[i];
+                if (sum < 366) {
+                    dayElem[1].classList.add('first-day-month');
+                    dayElem[sum + 1].classList.add('first-day-month');
+                }
+            }
         }
         getDays();
         
