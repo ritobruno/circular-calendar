@@ -27,7 +27,7 @@ body {
 
 .container .days-of-year {
     position: absolute;
-    font-size: 16px;
+    font-size: 14px;
     cursor: default;
     transform-origin: center left;
     font-weight: 400;
@@ -52,6 +52,12 @@ body {
     height: 1px;
     background-color: var(--font-color);
     position: relative;
+}
+
+.first-day-month > .day-mark {
+  background-color: var(--font-color);
+  width: 16px;
+  height: 2px;
 }
 
 .year-wrapper {
@@ -97,6 +103,7 @@ body {
     color: var(--days-color);
     text-transform: uppercase;
 }
+
 
 
 /******* Theme Switcher ***********/
